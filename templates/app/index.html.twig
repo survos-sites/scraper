@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AppController!{% endblock %}
+
+{% block body %}
+
+    {% set url = 'https://jsonplaceholder.typicode.com/users' %}
+    {% set users = request_data(url, asData='array') %}
+
+    {% set columns = users[0]|keys %}
+
+    <twig:simple_datatables :data="users" :columns="columns">
+        <twig:block name="id">
+            {{ row.id }}
+        </twig:block>
+    </twig:simple_datatables>
+
+    <h3>Albums</h3>
+    <ul>
+        {% for row in albums %}
+            <li>{{ row.title }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
